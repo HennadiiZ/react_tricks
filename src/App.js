@@ -55,11 +55,26 @@ function App() {
     console.log(items);
   }
 
+  function handleCheckedItem(id) {
+    // setItems((items) =>
+    //   items.map((item) => (item.id === id ? (item.packed = true) : item))
+    // );
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: !item.packed } : item
+      )
+    );
+  }
+
   return (
     <div className='app'>
       <Logo />
       <Form onAddItems={handleAddItem} />
-      <PackingList items={items} onDeleteItems={handleDeleteItem} />
+      <PackingList
+        items={items}
+        onDeleteItems={handleDeleteItem}
+        onCheckedItems={handleCheckedItem}
+      />
       {/* <PackingList items={items} /> */}
       <Stats />
       <FlashCards cards={questions} />
@@ -146,37 +161,58 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItems }) {
+function PackingList({ items, onDeleteItems, onCheckedItems }) {
   return (
     <div className='list'>
       <ul>
         {items.map((item) => (
           // <Item item={item} key={item.id} />
-          <Item item={item} key={item.id} onDeleteItems={onDeleteItems} />
+          <Item
+            item={item}
+            key={item.id}
+            onDeleteItems={onDeleteItems}
+            onCheckedItems={onCheckedItems}
+          />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item, onDeleteItems }) {
-  console.log(item);
-
-  function onDelete() {
-    onDeleteItems(item.id);
-  }
+function Item({ item, onDeleteItems, onCheckedItems }) {
+  console.log(item.packed);
 
   return (
     <li>
-      <input type='checkbox' />
+      {/* <input
+        type='checkbox'
+        value={item.packed}
+        onChange={(e) => onCheckedItems(item.id)}
+      /> */}
+
+      <input type='checkbox' onChange={(e) => onCheckedItems(item.id)} />
+
       <span style={{ textDecoration: item.packed ? 'line-through' : 'none' }}>
         {item.quantity} {item.description}
       </span>
-      {/* <button onClick={onDelete}>❌</button> */}
       <button onClick={() => onDeleteItems(item.id)}>❌</button>
     </li>
   );
 }
+
+// function Item({ item, onDeleteItems }) {
+//   console.log(item.packed);
+
+//   return (
+//     <li>
+//       <input type='checkbox' />
+//       <span style={{ textDecoration: item.packed ? 'line-through' : 'none' }}>
+//         {item.quantity} {item.description}
+//       </span>
+//       <button onClick={() => onDeleteItems(item.id)}>❌</button>
+//     </li>
+//   );
+// }
 
 function Stats() {
   return (
