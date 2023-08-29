@@ -134,6 +134,7 @@ function Form({ onAddItems }) {
         }}
       /> */}
       <button>Add</button>
+      <button>NO</button>
     </form>
   );
 }
