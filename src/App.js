@@ -43,6 +43,20 @@ const questions = [
 function App() {
   const [items, setItems] = useState([]);
 
+  const totalItems = items.length;
+
+  const PackedItemCountInPercentage = () => {
+    // const [items, setItems] = useState(initialItems);
+
+    // Filter the items to get an array of packed items
+    const packedItems = items.filter((item) => item.packed);
+
+    // Calculate the percentage of packed items
+    const percentagePacked = (packedItems.length / totalItems) * 100;
+    console.log('percentagePacked:', percentagePacked + '%');
+    return percentagePacked.toFixed(0);
+  };
+
   function handleAddItem(item) {
     setItems((items) => [...items, item]);
     console.log(items);
@@ -76,7 +90,10 @@ function App() {
         onCheckedItems={handleCheckedItem}
       />
       {/* <PackingList items={items} /> */}
-      <Stats />
+      <Stats
+        totalItems={totalItems}
+        PackedItemCountInPercentage={PackedItemCountInPercentage}
+      />
       <FlashCards cards={questions} />
       <FlashCardList cards={questions} />
       {/* <FlashCardsTwo cards={questions} /> */}
@@ -214,10 +231,14 @@ function Item({ item, onDeleteItems, onCheckedItems }) {
 //   );
 // }
 
-function Stats() {
+function Stats({ totalItems, PackedItemCountInPercentage }) {
   return (
     <footer className='stats'>
-      <em>You have X items on your list, and you already packed X (X%)</em>
+      {/* <em>You have X items on your list, and you already packed X (X%)</em> */}
+      <em>
+        You have {totalItems} items on your list, and you already packed{' '}
+        {PackedItemCountInPercentage()} (%)
+      </em>
     </footer>
   );
 }
