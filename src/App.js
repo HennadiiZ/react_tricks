@@ -1,10 +1,10 @@
 import './App.css';
 import { useState } from 'react';
 
-const initialItems = [
-  { id: 1, description: 'Passports', quantity: 2, packed: false },
-  { id: 2, description: 'Socks', quantity: 12, packed: false },
-];
+// const initialItems = [
+//   { id: 1, description: 'Passports', quantity: 2, packed: false },
+//   { id: 2, description: 'Socks', quantity: 12, packed: false },
+// ];
 
 const questions = [
   {
@@ -48,11 +48,19 @@ function App() {
     console.log(items);
   }
 
+  function handleDeleteItem(id) {
+    // setItems((items) => [...items].filter((it) => it !== item));
+    // setItems((items) => [...items].filter((it) => it.id !== item.id));
+    setItems((items) => items.filter((it) => it.id !== id));
+    console.log(items);
+  }
+
   return (
     <div className='app'>
       <Logo />
       <Form onAddItems={handleAddItem} />
-      <PackingList items={items} />
+      <PackingList items={items} onDeleteItems={handleDeleteItem} />
+      {/* <PackingList items={items} /> */}
       <Stats />
       <FlashCards cards={questions} />
       <FlashCardList cards={questions} />
@@ -134,36 +142,38 @@ function Form({ onAddItems }) {
         }}
       /> */}
       <button>Add</button>
-      <button>NO</button>
     </form>
   );
 }
 
-function PackingList({ items }) {
+function PackingList({ items, onDeleteItems }) {
   return (
     <div className='list'>
       <ul>
-        {/* {initialItems.map((item) => (
-          <Item item={item} key={item.id} />
-        ))} */}
         {items.map((item) => (
-          <Item item={item} key={item.id} />
+          // <Item item={item} key={item.id} />
+          <Item item={item} key={item.id} onDeleteItems={onDeleteItems} />
         ))}
       </ul>
     </div>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItems }) {
   console.log(item);
+
+  function onDelete() {
+    onDeleteItems(item.id);
+  }
+
   return (
     <li>
       <input type='checkbox' />
-      {/* <input type="checkbox" {item.packed && 'checked="checked"'} /> */}
       <span style={{ textDecoration: item.packed ? 'line-through' : 'none' }}>
         {item.quantity} {item.description}
       </span>
-      <button>❌</button>
+      {/* <button onClick={onDelete}>❌</button> */}
+      <button onClick={() => onDeleteItems(item.id)}>❌</button>
     </li>
   );
 }
