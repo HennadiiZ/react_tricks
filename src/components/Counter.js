@@ -54,3 +54,40 @@ export default function Counter() {
     </div>
   );
 }
+
+//1st version
+// function Counter() {
+//   const num = 1;
+//   const date = new Date('Wed Jul 21 2027');
+
+//   const [step, setStep] = useState(num);
+//   const [count, setCount] = useState(num);
+
+//   date.setDate(date.getDate() + count);
+
+//   return (
+//     <div className='steps'>
+//       <div>
+//         <button onClick={() => setStep(() => step - num)}>-</button>
+//         Step: {step}
+//         <button onClick={() => setStep(() => step + num)}>+</button>
+//       </div>
+//       <div>
+//         <button onClick={() => setCount(() => count - step)}>-</button>
+//         Count: {count}
+//         <button onClick={() => setCount(() => count + step)}>+</button>
+//       </div>
+//       <div>
+//         <p>
+//           {/* {step} days from today is {date.toDateString()} */}
+//           {count === 0
+//             ? 'Today is '
+//             : count > 0
+//             ? `${count} days from today is `
+//             : `${Math.abs(count)} days ago was `}
+//           {date.toDateString()}
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }

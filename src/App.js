@@ -3,6 +3,7 @@ import { useState } from 'react';
 // import initialItems from './data/initialItems';
 import questions from './data/questions';
 import faqs from './data/faqs';
+import messages from './data/messages';
 import Logo from './components/Logo';
 import Form from './components/Form';
 import PackingList from './components/PackingList';
@@ -10,6 +11,7 @@ import Stats from './components/Stats';
 import Counter from './components/Counter'; // counter and range
 import FlashCardList from './components/FlashCardList';
 import Accordion from './components/Accordion';
+import Steps from './components/Steps';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -71,6 +73,7 @@ function App() {
       <FlashCards cards={questions} />
       <FlashCardList cards={questions} />
       <Counter />
+      <Steps messages={messages} />
     </div>
   );
 }
