@@ -69,6 +69,16 @@ function App() {
     console.log(items);
   }
 
+  function clearAllItems() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete all items?'
+    );
+
+    if (confirmed) {
+      setItems([]);
+    }
+  }
+
   function handleCheckedItem(id) {
     // setItems((items) =>
     //   items.map((item) => (item.id === id ? (item.packed = true) : item))
@@ -86,6 +96,7 @@ function App() {
       <Form onAddItems={handleAddItem} />
       <PackingList
         items={items}
+        clearAllItems={clearAllItems}
         onDeleteItems={handleDeleteItem}
         onCheckedItems={handleCheckedItem}
       />
@@ -178,7 +189,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItems, onCheckedItems }) {
+function PackingList({ items, clearAllItems, onDeleteItems, onCheckedItems }) {
   const [sortBy, setSortBy] = useState('input');
 
   let sortedItems;
@@ -198,6 +209,10 @@ function PackingList({ items, onDeleteItems, onCheckedItems }) {
       sortedItems = items;
       break;
   }
+
+  // function clearAllItems() {
+  //   setItems((prev) => []);
+  // }
 
   return (
     <div className='list'>
@@ -232,6 +247,7 @@ function PackingList({ items, onDeleteItems, onCheckedItems }) {
           <option value='description'>Sort by description</option>
           <option value='packed'>Sort by packed status</option>
         </select>
+        <button onClick={clearAllItems}>Clear All</button>
       </div>
     </div>
   );
