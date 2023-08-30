@@ -179,11 +179,38 @@ function Form({ onAddItems }) {
 }
 
 function PackingList({ items, onDeleteItems, onCheckedItems }) {
+  const [sortBy, setSortBy] = useState('input');
+
+  let sortedItems;
+
+  switch (sortBy) {
+    case 'description':
+      sortedItems = items
+        .slice()
+        .sort((a, b) => a.description.localeCompare(b.description));
+      break;
+    case 'packed':
+      sortedItems = items
+        .slice()
+        .sort((a, b) => Number(a.packed) - Number(b.packed));
+      break;
+    default:
+      sortedItems = items;
+      break;
+  }
+
   return (
     <div className='list'>
       <ul>
-        {items.map((item) => (
-          // <Item item={item} key={item.id} />
+        {/* {items.map((item) => (
+          <Item
+            item={item}
+            key={item.id}
+            onDeleteItems={onDeleteItems}
+            onCheckedItems={onCheckedItems}
+          />
+        ))} */}
+        {sortedItems.map((item) => (
           <Item
             item={item}
             key={item.id}
@@ -192,6 +219,20 @@ function PackingList({ items, onDeleteItems, onCheckedItems }) {
           />
         ))}
       </ul>
+      <div className='actions'>
+        {/* <select
+          value={sortBy}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setSortBy(e.target.value);
+          }}
+        > */}
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value='input'>Sort by input order</option>
+          <option value='description'>Sort by description</option>
+          <option value='packed'>Sort by packed status</option>
+        </select>
+      </div>
     </div>
   );
 }
