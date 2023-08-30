@@ -232,13 +232,33 @@ function Item({ item, onDeleteItems, onCheckedItems }) {
 // }
 
 function Stats({ totalItems, PackedItemCountInPercentage }) {
+  // if (!totalItems) {
+  //   return (
+  //     <footer className='stats'>
+  //       <em>You have not packed anything so far!!!</em>
+  //     </footer>
+  //   );
+  // }
+  const packedPercentage = PackedItemCountInPercentage();
+  console.log('packedPercentage', packedPercentage);
   return (
     <footer className='stats'>
-      {/* <em>You have X items on your list, and you already packed X (X%)</em> */}
-      <em>
-        You have {totalItems} items on your list, and you already packed{' '}
-        {PackedItemCountInPercentage()} (%)
-      </em>
+      {/* <em>
+        {PackedItemCountInPercentage() === 100
+          ? 'You got everything'
+          : `You have ${totalItems} items on your list, and you already packed
+        (${PackedItemCountInPercentage()} %)`}
+      </em> */}
+
+      {totalItems > 0 ? (
+        <em>
+          {+packedPercentage === 100
+            ? 'You got everything'
+            : `You have ${totalItems} items on your list, and you already packed (${packedPercentage} %)`}
+        </em>
+      ) : (
+        <em>You have not packed anything so far.</em>
+      )}
     </footer>
   );
 }
