@@ -2,12 +2,14 @@ import './App.css';
 import { useState } from 'react';
 // import initialItems from './data/initialItems';
 import questions from './data/questions';
+import faqs from './data/faqs';
 import Logo from './components/Logo';
 import Form from './components/Form';
 import PackingList from './components/PackingList';
 import Stats from './components/Stats';
 import Counter from './components/Counter'; // counter and range
 import FlashCardList from './components/FlashCardList';
+import Accordion from './components/Accordion';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -53,6 +55,7 @@ function App() {
 
   return (
     <div className='app'>
+      <Accordion faqs={faqs} />
       <Logo />
       <Form onAddItems={handleAddItem} />
       <PackingList
