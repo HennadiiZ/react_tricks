@@ -1,9 +1,9 @@
-export default function Button({ btnName, PrevButton }) {
+export default function Button({ bgColor, textColor, btnName, onClick }) {
   return (
     <button
-      style={{ background: '#7950f2', color: '#fff' }}
+      style={{ background: bgColor, color: textColor }}
       className='message'
-      onClick={PrevButton}
+      onClick={onClick}
     >
       {btnName}
     </button>
