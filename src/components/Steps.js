@@ -34,18 +34,27 @@ export default function Steps({ messages }) {
         </p>
 
         <div className='buttons'>
-          <Button
+          {/* <Button
             bgColor='#7950f2'
             textColor='#fff'
             btnName='Prev'
             onClick={PrevButton}
-          />
-          <Button
+          /> */}
+          {/* <Button
             bgColor='#7950f2'
             textColor='#fff'
             btnName='Prev'
             onClick={NextButton}
-          />
+          /> */}
+
+          <Button bgColor='#7950f2' textColor='#fff' onClick={PrevButton}>
+            <span>🖐️️</span>
+            ️Prev
+          </Button>
+          <Button bgColor='#7950f2' textColor='#fff' onClick={NextButton}>
+            <span>🖐️️</span>
+            Next
+          </Button>
         </div>
       </div>
     </div>
