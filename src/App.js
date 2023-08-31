@@ -12,6 +12,7 @@ import Counter from './components/Counter'; // counter and range
 import FlashCardList from './components/FlashCardList';
 import Accordion from './components/Accordion';
 import Steps from './components/Steps';
+import Button from './components/Button';
 
 function App() {
   const [items, setItems] = useState([]);
