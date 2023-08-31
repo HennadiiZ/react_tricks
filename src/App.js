@@ -12,7 +12,8 @@ import Counter from './components/Counter'; // counter and range
 import FlashCardList from './components/FlashCardList';
 import Accordion from './components/Accordion';
 import Steps from './components/Steps';
-import Button from './components/Button';
+// import Button from './components/Button';
+import TipCalculator from './components/Calculator/TipCalculator';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <div className='app'>
+      <TipCalculator />
       <Accordion faqs={faqs} />
       <Logo />
       <Form onAddItems={handleAddItem} />
