@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
+import Message from './Message';
 
 export default function Steps({ messages }) {
   const [step, setStep] = useState(1);
@@ -29,9 +30,12 @@ export default function Steps({ messages }) {
           <div className={step >= 3 ? 'active' : ''}>3</div>
         </div>
 
-        <p className='message' key={messages[step - 1]}>
+        {/* <p className='message' key={messages[step - 1]}>
           Step {step}: {messages[step - 1]}
-        </p>
+        </p> */}
+        <Message classN='message' messages={messages} step={step}>
+          Step {step}: {messages[step - 1]}
+        </Message>
 
         <div className='buttons'>
           {/* <Button
